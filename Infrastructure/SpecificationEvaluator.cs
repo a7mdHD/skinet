@@ -16,6 +16,21 @@ namespace Infrastructure
                 query = query.Where(spec.Criteria);
             }
 
+            if(spec.OrderBy != null)
+            {
+                query = query.OrderBy(spec.OrderBy);
+            }
+
+            if(spec.OrderByDescending != null)
+            {
+                query = query.OrderByDescending(spec.OrderByDescending);
+            }
+
+            if(spec.IsPagingEnabled)
+            {
+                query = query.Take(spec.Take).Skip(spec.Skip);
+            }
+
             /* Do the same thing as Products
                 .Include(b => b.ProductBrand)
                 .Include(t => t.ProductType) */
